@@ -3,18 +3,22 @@ import { AddressesModule } from './addresses/addresses.module';
 import { TrucksModule } from './trucks/trucks.module';
 import { ClientsModule } from './clients/clients.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
     imports: [
         TypeOrmModule.forRoot({
             type: 'postgres',
-            host: 'localhost',
+            host: process.env.DATABASE_HOST || 'localhost',
             port: 5432,
-            username: 'postgres',
-            password: 'admin',
-            database: 'logistic',
+            username: process.env.DATABASE_USER || 'postgres',
+            password: process.env.DATABASE_PASSWORD || 'admin',
+            database: process.env.DATABASE_NAME || 'logistic',
             synchronize: true,
             autoLoadEntities: true,
+        }),
+        ConfigModule.forRoot({
+            port: 
         }),
         AddressesModule,
         TrucksModule,

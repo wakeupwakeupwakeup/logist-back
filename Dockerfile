@@ -13,12 +13,10 @@ RUN pnpm run build
 RUN apt-get update && apt-get install -y postgresql postgresql-contrib
 
 RUN service postgresql start && \
-    su postgres -c "pg_ctl initdb -D /var/lib/postgresql/data" && \
-    su postgres -c "pg_ctl start -D /var/lib/postgresql/data" && \
     su postgres -c "psql -c \"CREATE USER logist_user WITH PASSWORD 'admin';\"" && \
     su postgres -c "psql -c \"CREATE DATABASE logistc_db OWNER logist_user;\""
 
-EXPOSE 3000
+EXPOSE 8080
 EXPOSE 5432
 
 CMD pg_ctl start -D /var/lib/postgresql/data && pnpm run start:dev
