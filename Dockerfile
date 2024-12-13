@@ -4,7 +4,7 @@ WORKDIR /usr/src/app
 
 COPY package*.json ./
 
-RUN npm install -g pnpm && pnpm install
+RUN npm install -g pnpm@latest && pnpm install
 
 COPY . .
 
@@ -17,6 +17,5 @@ RUN service postgresql start && \
     su postgres -c "psql -c \"CREATE DATABASE logistc_db OWNER logist_user;\""
 
 EXPOSE 8080
-EXPOSE 5432
 
-CMD pg_ctl start -D /var/lib/postgresql/data && pnpm run start:dev
+CMD service postgresql start && pnpm run start:dev
