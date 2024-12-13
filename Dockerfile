@@ -13,7 +13,7 @@ RUN pnpm run build
 RUN apt-get update && apt-get install -y postgresql postgresql-contrib
 
 RUN service postgresql start && \
-    su postgres -c "psql -c \"CREATE USER postgres WITH PASSWORD 'admin';\"" && \
+    su postgres -c "psql -c \"ALTER USER postgres WITH PASSWORD 'admin';\"" &&\
     su postgres -c "psql -c \"CREATE DATABASE logistc_db OWNER logist_user;\""
 
 EXPOSE 8080
