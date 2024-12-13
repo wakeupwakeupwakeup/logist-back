@@ -14,7 +14,7 @@ RUN apt-get update && apt-get install -y postgresql postgresql-contrib
 
 RUN service postgresql start && \
     su postgres -c "psql -c \"ALTER USER postgres WITH PASSWORD 'admin';\"" &&\
-    su postgres -c "psql -c \"CREATE DATABASE logistc_db OWNER postgres;\""
+    su postgres -c "psql -c \"CREATE DATABASE logistic OWNER postgres;\""
 
 EXPOSE 8080
 
