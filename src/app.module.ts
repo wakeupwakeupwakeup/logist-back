@@ -3,7 +3,6 @@ import { AddressesModule } from './addresses/addresses.module';
 import { TrucksModule } from './trucks/trucks.module';
 import { ClientsModule } from './clients/clients.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { ConfigModule } from '@nestjs/config';
 
 @Module({
     imports: [
@@ -16,9 +15,6 @@ import { ConfigModule } from '@nestjs/config';
             database: process.env.DATABASE_NAME || 'logistic',
             synchronize: true,
             autoLoadEntities: true,
-        }),
-        ConfigModule.forRoot({
-            port: 
         }),
         AddressesModule,
         TrucksModule,
