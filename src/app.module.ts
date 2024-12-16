@@ -8,9 +8,6 @@ import { ReportsModule } from './report/reports,module';
 import { config } from 'dotenv';
 
 config();
-import { config } from 'dotenv';
-
-config();
 
 @Module({
     imports: [
