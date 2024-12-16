@@ -1,5 +1,6 @@
 import { Client } from 'src/clients/client.entity';
 import { Truck } from 'src/trucks/truck.entity';
+import { Report } from 'src/report/report.entity';
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity('addresses')
@@ -21,6 +22,9 @@ export class Address {
 
     @Column({ nullable: true })
     priority: number;
+
+    @ManyToOne(() => Report, (report) => report.address)
+    reports: Report[]
 
     @ManyToOne(() => Truck, (truck) => truck.addresses, {
         nullable: true,
