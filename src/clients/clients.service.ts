@@ -35,10 +35,7 @@ export class ClientsService {
             ])
             .where('address.clientId = :id', { id })
             .getRawMany();
-
-        const { name, contacts } = client;
-        console.log(addresses);
-
+            
         return {
             name: client.name,
             addresses: addresses.map((address) => ({
@@ -77,7 +74,9 @@ export class ClientsService {
             if (!client) {
                 const addresses = jsonData.map((address) => ({
                     address: address['Адрес'] + ', ' + address['Учреждение'],
-                    schedule: ['вт', 'пт'],
+                    schedule: address['График']
+                        .split(',')
+                        .map((day) => day.trim()),
                     containers: {
                         volume: address['Объём бака, м3'],
                         count: address['Количество баков'],

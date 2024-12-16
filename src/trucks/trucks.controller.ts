@@ -24,6 +24,11 @@ export class TrucksController {
         return this.trucksService.findOne(id);
     }
 
+    @Get('/:id/addresses')
+    async getRoute(@Param('id', ParseIntPipe) id: number) {
+        return this.trucksService.getAddresses(id)
+    }
+
     @Post()
     async create(@Body() truck: Partial<Truck>) {
         return this.trucksService.create(truck);

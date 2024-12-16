@@ -1,6 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { Truck } from './truck.entity';
-import { DataSource, Repository } from 'typeorm';
+import { DataSource } from 'typeorm';
+import { Address } from 'src/addresses/address.entity';
 
 @Injectable()
 export class TrucksService {
@@ -18,6 +19,12 @@ export class TrucksService {
             throw new NotFoundException();
         }
         return truck;
+    }
+
+    async getAddresses(id: number) {
+        return await this.dataSource
+            .getRepository(Address)
+            .findBy({ truck: { id} });
     }
 
     async create(truckData: Partial<Truck>) {

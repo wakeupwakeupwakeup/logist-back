@@ -3,6 +3,8 @@ import { AddressesModule } from './addresses/addresses.module';
 import { TrucksModule } from './trucks/trucks.module';
 import { ClientsModule } from './clients/clients.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { DriversModule } from './driver/drivers.module';
+import { ReportsModule } from './report/reports,module';
 
 @Module({
     imports: [
@@ -15,12 +17,12 @@ import { TypeOrmModule } from '@nestjs/typeorm';
             database: 'logistic',
             synchronize: true,
             autoLoadEntities: true,
-            logging: true,
-            logger: 'advanced-console',
         }),
+        ReportsModule,
         AddressesModule,
         TrucksModule,
         ClientsModule,
+        DriversModule,
     ],
 })
 export class AppModule {}

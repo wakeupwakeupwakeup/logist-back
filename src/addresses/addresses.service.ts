@@ -1,12 +1,19 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
 import { Address } from './address.entity';
-import { DataSource, Repository } from 'typeorm';
+import { DataSource } from 'typeorm';
 import { Truck } from 'src/trucks/truck.entity';
 
 @Injectable()
 export class AddressesService {
     constructor(private dataSource: DataSource) {}
+
+    async findOne(id: number) {
+        const address = this.dataSource.getRepository(Address).findOneBy({id})
+        if (!address) {
+            throw new NotFoundException()
+        }
+        return address
+    }
 
     async findByClient(id: number) {
         const addresses = await this.dataSource
@@ -20,6 +27,12 @@ export class AddressesService {
         }
 
         return addresses;
+    }
+
+    async changePriority(id: number, priority: number) {
+        return this.dataSource.transaction(async (manager) => {
+            manager.update(Address, {id}, {priority})
+        })
     }
 
     async attachTruck(addressId: number, truckId: number) {

@@ -9,6 +9,5 @@ import { Address } from 'src/addresses/address.entity';
     imports: [TypeOrmModule.forFeature([Truck, Address])],
     providers: [TrucksService],
     controllers: [TrucksController],
-    exports: [TypeOrmModule],
 })
 export class TrucksModule {}
